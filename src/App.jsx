@@ -1,12 +1,18 @@
+import axios from "axios";
 import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [message, setMessage] = useState(null);
+
+  const getHello = async () => {
+    const response = await axios.get("/api/hello");
+    setMessage(response.data.message);
+  };
 
   return (
-    <button onClick={() => setCount((count) => count + 1)}>
-      count is {count}
-    </button>
+    <div>
+      <button onClick={getHello}>Message is: {message}</button>
+    </div>
   );
 }
 
